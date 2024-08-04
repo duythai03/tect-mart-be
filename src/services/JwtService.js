@@ -26,4 +26,37 @@ const generalRefreshToken = (payload) => {
   return refresh_Token;
 };
 
-module.exports = { generalAccessToken, generalRefreshToken };
+const refreshTokenJwtService = (token) => {
+  return new Promise((resolve, reject) => {
+    try {
+      console.log("token", token);
+      jwt.verify(token, process.env.REFRESH_TOKEN, async (err, user) => {
+        if (err) {
+          resolve({
+            status: "ERR",
+            message: "Unauthorized",
+          });
+        }
+        console.log("user", user);
+        const { payload } = user;
+        const access_token = await generalAccessToken({
+          id: payload?.id,
+          isAdmin: payload?.isAdmin,
+        });
+        resolve({
+          status: "OK",
+          message: "success",
+          access_token,
+        });
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+module.exports = {
+  generalAccessToken,
+  generalRefreshToken,
+  refreshTokenJwtService,
+};
