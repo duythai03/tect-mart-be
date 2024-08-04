@@ -36,7 +36,7 @@ const createUser = (newUser) => {
 
 const loginUser = (userLogin) => {
   return new Promise(async (resolve, reject) => {
-    const { name, email, password, confirmPassword, phone } = userLogin;
+    const { email, password } = userLogin;
     try {
       const checkUser = await User.findOne({ email: email });
       if (checkUser === null) {
@@ -123,11 +123,9 @@ const deleteUser = (id) => {
   });
 };
 
-const getAllUser = (id) => {
+const getAllUser = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const checkUser = await User.findOne({ _id: id });
-
       const allUser = await User.find();
       resolve({
         status: "OK",
