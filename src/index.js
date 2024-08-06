@@ -11,7 +11,12 @@ dotenv.config({ path: "./src/.env" });
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // URL của frontend
+    credentials: true, // Đảm bảo rằng các cookie và thông tin chứng thực có thể được gửi đi
+  })
+);
 app.use(bodyParser.json());
 app.use(cookieParser());
 
