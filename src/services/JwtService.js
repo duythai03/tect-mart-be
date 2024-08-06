@@ -6,7 +6,7 @@ const generalAccessToken = (payload) => {
   console.log("payload", payload);
   const access_Token = jwt.sign(
     {
-      payload,
+      ...payload,
     },
     process.env.ACCESS_TOKEN,
     { expiresIn: "1h" }
@@ -18,7 +18,7 @@ const generalRefreshToken = (payload) => {
   console.log("payload", payload);
   const refresh_Token = jwt.sign(
     {
-      payload,
+      ...payload,
     },
     process.env.REFRESH_TOKEN,
     { expiresIn: "365d" }
