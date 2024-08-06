@@ -3,10 +3,10 @@ const JwtServices = require("../services/JwtService");
 
 const createUser = async (req, res) => {
   try {
-    const { name, email, password, confirmPassword, phone } = req.body;
+    const { email, password, confirmPassword } = req.body;
     const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     const isCheckEmail = reg.test(email);
-    if (!name || !email || !password || !confirmPassword || !phone) {
+    if (!email || !password || !confirmPassword) {
       return res.status(200).json({
         status: "ERR",
         message: "All fields are required",
@@ -23,9 +23,7 @@ const createUser = async (req, res) => {
       });
     }
     const result = await UserServices.createUser(req.body);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -50,9 +48,7 @@ const loginUser = async (req, res) => {
       });
     }
     const result = await UserServices.loginUser(req.body);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -71,9 +67,7 @@ const updateUser = async (req, res) => {
       });
     }
     const result = await UserServices.updateUser(userId, data);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -91,9 +85,7 @@ const deleteUser = async (req, res) => {
       });
     }
     const result = await UserServices.deleteUser(userId);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -104,9 +96,7 @@ const deleteUser = async (req, res) => {
 const getAllUser = async (req, res) => {
   try {
     const result = await UserServices.getAllUser();
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -124,9 +114,7 @@ const getDetailsUser = async (req, res) => {
       });
     }
     const result = await UserServices.getDetailsUser(userId);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -144,9 +132,7 @@ const refreshToken = async (req, res) => {
       });
     }
     const result = await JwtServices.refreshTokenJwtService(token);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
