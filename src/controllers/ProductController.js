@@ -12,9 +12,7 @@ const createProduct = async (req, res) => {
       });
     }
     const result = await ProductService.createProduct(req.body);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -33,9 +31,7 @@ const updateProduct = async (req, res) => {
       });
     }
     const result = await ProductService.updateProduct(productId, data);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -53,9 +49,7 @@ const deleteProduct = async (req, res) => {
       });
     }
     const result = await ProductService.deleteProduct(productId);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -73,9 +67,7 @@ const getDetailsProduct = async (req, res) => {
       });
     }
     const result = await ProductService.getDetailsProduct(productId);
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
@@ -92,9 +84,7 @@ const getAllProduct = async (req, res) => {
       sort,
       filter
     );
-    return res.status(201).json({
-      message: result,
-    });
+    return res.status(201).json(result);
   } catch (err) {
     return res.status(404).json({
       message: err,
