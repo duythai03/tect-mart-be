@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
       if (err) {
         return res.status(401).json({
           status: "ERR",
-          message: "Unauthorized",
+          message: err,
         });
       }
       if (user?.isAdmin) {
